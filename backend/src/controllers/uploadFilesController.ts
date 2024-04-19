@@ -7,6 +7,7 @@ import File from "../models/file.model";
 
 export const uploadPdf = (req: Request, res: Response) => {};
 
+<<<<<<< HEAD
 export const uploadImage = async (req: Request, res: Response) => {
   try {
     // @ts-ignore
@@ -56,6 +57,11 @@ export const uploadImage = async (req: Request, res: Response) => {
 };
 // export const uploadImage = async (req: Request, res: Response) => {
 //   const { width, height, minKb, maxKb } = req.body;
+=======
+
+export const uploadImage = async (req: Request, res: Response) => {
+  const { width, height, minKb, maxKb } = req.body;
+>>>>>>> 606170b (Frontend.)
 
 //   if (!req.file) {
 //     return res.status(400).send("No file uploaded.");
