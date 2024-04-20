@@ -29,6 +29,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ closeModal, openModal }) 
     
       console.log("register successful:", response.data);
       closeModal();
+      openModal();
       
     } catch (error) {
       setError("register failed. Please Check your email and password.");

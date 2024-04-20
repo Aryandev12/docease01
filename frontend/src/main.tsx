@@ -31,7 +31,9 @@ import RegisterModal from "./pages/SignUp";
             <Route path="login" element={<Login closeModal={() => { } } openRegisterModal={function (): void {
               throw new Error("Function not implemented.");
             } } />} />
-            <Route path="signup" element={<RegisterModal closeModal={() => {}}  />} />
+            <Route path="signup" element={<RegisterModal closeModal={() => { } } openModal={function (): void {
+              throw new Error("Function not implemented.");
+            } }  />} />
             <Route path="profile/:id" element={<UserProfile />} />
             <Route path="profile/:id/setting" element={<UserSetting />} />
             <Route path="profile/:id/dashboard" element={<Dashboard />} />

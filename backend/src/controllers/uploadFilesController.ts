@@ -9,6 +9,11 @@ export const uploadPdf = (req: Request, res: Response) => {};
 
 export const uploadImage = async (req: Request, res: Response) => {
   const { width, height, minKb, maxKb } = req.body;
+  console.log(req.file)
+
+  if (!width || !height || !minKb || !maxKb) {
+      return res.status(400).send("Missing required parameters.");
+  }
 
   if (!req.file) {
       return res.status(400).send("No file uploaded.");
