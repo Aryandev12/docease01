@@ -1,21 +1,45 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import  {CurrentUserContext} from '../context/userContext'
 
 const Login = ({ closeModal, openRegisterModal }: { closeModal: () => void; openRegisterModal: () => void; }) => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const {setCurrentUser}=useContext(CurrentUserContext)
+  
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     // Perform login authentication here
     // For simplicity, just check if both username and password are provided
-    if (username.trim() === '' || password.trim() === '') {
+
+    if (email.trim() === '' || password.trim() === '') {
       setError('Please provide both username and password.');
-    } else {
-      // If authentication is successful, you can perform further actions like redirecting to the dashboard
-      console.log('Logged in successfully!');
-      closeModal();
+      return ;
+
+    } 
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/users/login",
+        {
+          email,
+          password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      console.log("Login successful:", response.data);
+      const loginUser = await response.data.data
+      setCurrentUser(loginUser)
+      navigate(`/profile/${loginUser.id}/dashboard`);
+      
+    } catch (error) {
+      setError("Login failed. Please Check your email  and password .");
+      console.error("Login failed:", error);
+      
     }
   };
   const handleOpenRegisterModal = () => {
@@ -31,8 +55,8 @@ const Login = ({ closeModal, openRegisterModal }: { closeModal: () => void; open
         <input
           type="text"
           placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           className="border border-gray-300 rounded-md p-2 mb-4 w-full"
         />
         <input

@@ -50,7 +50,12 @@ export const login = async (req: Request, res: Response) => {
     res.cookie("token", token);
     return res.json({
       message: "user has been logged in",
-      data: findUserInDb,
+      data: {
+        id: findUserInDb._id,
+        name: findUserInDb.name,
+        email: findUserInDb.email,
+        token: token,
+      }
     });
   } catch (err) {
     console.log(err);

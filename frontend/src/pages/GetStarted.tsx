@@ -93,7 +93,7 @@ const GetStarted = () => {
 
            {/* Render the modal conditionally */}
         {isModalOpen && <Login closeModal={closeModal} openRegisterModal={openRegisterModal} />}
-        {isRegisterModalOpen && <RegisterModal closeModal={closeRegisterModal}  />}
+        {isRegisterModalOpen && <RegisterModal closeModal={closeRegisterModal} openModal={openModal} />}
 
        </div>
 

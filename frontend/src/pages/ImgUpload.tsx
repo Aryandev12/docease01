@@ -5,7 +5,7 @@ const ImgUpload = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [uploadStatus, setUploadStatus] = useState("idle"); // 'idle', 'uploading', 'success', 'error'
 
-  const handleImageChange = (event) => {
+  const handleImageChange = (event: { target: { files: any[]; }; }) => {
     const imageFile = event.target.files[0];
     if (!imageFile) return;
 

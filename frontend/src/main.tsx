@@ -20,7 +20,8 @@ import RegisterModal from "./pages/SignUp";
 
 
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+
+(ReactDOM as any).createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
@@ -34,6 +35,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <Route path="profile/:id" element={<UserProfile />} />
             <Route path="profile/:id/setting" element={<UserSetting />} />
             <Route path="profile/:id/dashboard" element={<Dashboard />} />
+            <Route path="profile/:id/upload" element={<ImgUpload />} />
             <Route path="help" element={<HelpandSupport />} />
             <Route path="document" element={<DocumentManagement />} />
             <Route path="document-track" element={<DocumentTracking />} />

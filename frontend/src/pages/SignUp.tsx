@@ -1,18 +1,39 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 
-const RegisterModal = ({ closeModal }: { closeModal: () => void }) => {
+interface RegisterModalProps {
+  closeModal: () => void;
+  openModal: () => void;
+}
+
+const RegisterModal: React.FC<RegisterModalProps> = ({ closeModal, openModal }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you can perform your registration logic, such as sending a request to your backend
-    // For simplicity, let's just log the form data
-    console.log({ email, password, name });
-    // Assuming registration is successful, you can close the modal
-    closeModal();
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/users/register",
+        {
+          email,
+          password,
+          name,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+    
+      console.log("register successful:", response.data);
+      closeModal();
+      
+    } catch (error) {
+      setError("register failed. Please Check your email and password.");
+      console.error("register failed:", error);
+    }
   };
 
   return (

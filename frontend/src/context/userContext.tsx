@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, SetStateAction } from 'react';
 
 interface User {
+  email: SetStateAction<string>;
   // Define the structure of your User object here
   // For example:
   id: number;
